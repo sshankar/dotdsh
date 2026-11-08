@@ -1,0 +1,44 @@
+lockfileVersion: '9.0'
+
+settings:
+  autoInstallPeers: false
+  excludeLinksFromLockfile: false
+
+importers:
+
+  .:
+    dependencies:
+      dsh-context:
+        specifier: ^0.82.2
+        version: 0.82.2
+
+packages:
+
+  dsh-context@0.82.2:
+    resolution: {integrity: sha512-myYjK6a79ZDJ1ALTI3hIBjVk2lsNCb3hUViSeS7Vjf+Xi2G8jkT1bi8+njyd77uOVDT6NYBPkjbf5bP5OXpafg==}
+    engines: {dsh: '>=0.2.0-rc.2 || >=0.2.1-rc.2 || >=0.2.2-rc.1', node: ^22.19.0 || >=24.0.0}
+    peerDependencies:
+      '@deepseek-ai/cordis': ^4.0.4 || >=4.0.6-alpha.2 <5.0.0
+      '@deepseek-ai/dsh-client-ui-primitives': '>=0.2.0-rc.2 || >=0.2.1-rc.2 || >=0.2.2-rc.1'
+      '@deepseek-ai/dsh-session': '>=0.2.0-rc.2 || >=0.2.1-rc.2 || >=0.2.2-rc.1'
+      '@deepseek-ai/schemastery': ^3.18.2 || >=3.18.6-alpha.2 <4.0.0
+      react: ^18.3.1
+      react-dom: ^18.3.1
+    peerDependenciesMeta:
+      '@deepseek-ai/dsh-client-ui-primitives':
+        optional: true
+      react:
+        optional: true
+      react-dom:
+        optional: true
+
+  zod@4.4.3:
+    resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
+
+snapshots:
+
+  dsh-context@0.82.2:
+    dependencies:
+      zod: 4.4.3
+
+  zod@4.4.3: {}

@@ -1,0 +1,16 @@
+# secrets & identity
+.credentials.yaml
+.anonymous-user-id
+
+# runtime state / history
+sessions/
+storages/
+logs/
+
+# installs & disposable artifacts
+node_modules/
+profiles/*/node_modules/
+profiles/*/.plugin-manager/
+
+# machine-local override layer
+/cordis.patch.yml
