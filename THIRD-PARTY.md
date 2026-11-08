@@ -8,8 +8,13 @@
 - **Installed at:** `skills/` (the `user-dsh` skill root, rank 400)
 - **License:** MIT, Copyright (c) 2026 Intel Corporation (full text below)
 
-These are copied verbatim. Local edits will be overwritten on update, so keep
-customizations in a separate, differently named skill instead.
+These are copied from upstream with **one local modification**:
+`skills/phoronix-test-suite/SKILL.md` adds `disable-model-invocation: true`, so
+that skill is not offered to the model's catalog and is only reachable by
+explicit invocation. The other two skills are unmodified.
+
+Any other local edits will be overwritten on update, so keep customizations in a
+separate, differently named skill instead.
 
 ### Updating
 
@@ -18,6 +23,9 @@ tmp=$(mktemp -d)
 git clone --depth 1 https://github.com/intel/intel-performance-skills "$tmp"
 cp -r "$tmp"/skills/{linux-perf,performance-patterns,phoronix-test-suite} skills/
 rm -rf "$tmp"
+# re-apply the local modification (the copy above overwrites it)
+sed -i '/^name: phoronix-test-suite$/a disable-model-invocation: true' \
+  skills/phoronix-test-suite/SKILL.md
 # then update the commit hash above and commit
 ```
 
