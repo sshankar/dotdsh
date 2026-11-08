@@ -1,0 +1,12 @@
+diff --git a/skills/phoronix-test-suite/SKILL.md b/skills/phoronix-test-suite/SKILL.md
+index 7cb4423..de4311b 100644
+--- a/skills/phoronix-test-suite/SKILL.md
++++ b/skills/phoronix-test-suite/SKILL.md
+@@ -1,6 +1,7 @@
+ ---
+ name: phoronix-test-suite
+ description: Install, run, parse, and optimize benchmarks from the Phoronix Test Suite (PTS). Use this skill whenever the user mentions "phoronix", "pts/", or "phoronix-test-suite", or asks to run, measure, improve, or optimize a PTS test — e.g., "run pts/mt-dgemm", "optimize pts/compress-zstd", "what score does pts/x265 get". Trigger immediately on any `pts/<testname>` reference, even if the user doesn't explicitly say "phoronix". Also trigger when the user asks to find or edit the source code of a PTS test.
++disable-model-invocation: true
+ ---
+ 
+ <!-- (C) 2026 Intel Corporation, MIT license -->

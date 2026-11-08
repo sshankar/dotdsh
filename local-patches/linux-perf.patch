@@ -1,0 +1,74 @@
+diff --git a/skills/linux-perf/references/building-blocks.md b/skills/linux-perf/references/building-blocks.md
+index e21fe47..85d8065 100644
+--- a/skills/linux-perf/references/building-blocks.md
++++ b/skills/linux-perf/references/building-blocks.md
+@@ -194,6 +194,11 @@ System-wide snapshot for a fixed duration:
+ perf record -a -- sleep 10
+ ```
+ 
++`-a` opens CPU-wide events (`pid == -1`), which `kernel.perf_event_paranoid > 0`
++blocks even when per-process hardware events succeed. If it fails with a
++"perf_event_paranoid" hint, either drop `-a` and profile the workload directly, or
++lower the setting to `0`.
++
+ Reuse existing `perf.data` instead of re-recording whenever the user prefers or the workload is hard to reproduce.
+ 
+ ---
+@@ -463,7 +468,7 @@ its own thread-count flag (e.g., `--threads 1`), use that instead of `taskset`.
+ ### Step 1 — Single-core profile
+ 
+ ```bash
+-taskset -c 0 perf record -F 99 -a -g -o perf_1core.data -- <command>
++taskset -c 0 perf record -F 99 -g -o perf_1core.data -- <command>
+ perf report -i perf_1core.data --stdio --no-children -n \
+     --sort=comm,dso,sym 2>/dev/null \
+     | grep -E '^\s+[0-9]+\.[0-9]+%' | head -15 > /tmp/top15_1core.txt
+@@ -475,12 +480,20 @@ single-thread flag and note the difference in the report.
+ ### Step 2 — All-cores profile
+ 
+ ```bash
+-perf record -F 99 -a -g -o perf_ncore.data -- <command>
++perf record -F 99 -g -o perf_ncore.data -- <command>
+ perf report -i perf_ncore.data --stdio --no-children -n \
+     --sort=comm,dso,sym 2>/dev/null \
+     | grep -E '^\s+[0-9]+\.[0-9]+%' | head -15 > /tmp/top15_ncore.txt
+ ```
+ 
++> **Hybrid CPUs (P-cores + E-cores):** derive the core sets instead of trusting
++> `nproc`. Each core type has its own PMU and a different IPC, so a series that mixes
++> them turns a core-type change into an apparent scaling wall. Read the sets from
++> `/sys/bus/event_source/devices/cpu_core/cpus` (P) and
++> `/sys/bus/event_source/devices/cpu_atom/cpus` (E), and keep one series inside one
++> set. On such parts `HALF=$(nproc)/2` usually spans both types — take half of the
++> chosen set instead.
++
+ ### Step 3 — Midpoint profile (optional)
+ 
+ Only collect this when the delta in Step 4 is overwhelming (more than ~7 functions
+@@ -495,7 +508,7 @@ the report step. Otherwise record now:
+ 
+ ```bash
+ HALF=$(( $(nproc) / 2 ))
+-taskset -c 0-$((HALF-1)) perf record -F 99 -a -g -o perf_mid.data -- <command>
++taskset -c 0-$((HALF-1)) perf record -F 99 -g -o perf_mid.data -- <command>
+ perf report -i perf_mid.data --stdio --no-children -n \
+     --sort=comm,dso,sym 2>/dev/null \
+     | grep -E '^\s+[0-9]+\.[0-9]+%' | head -15 > /tmp/top15_mid.txt
+diff --git a/skills/linux-perf/references/flow-d.md b/skills/linux-perf/references/flow-d.md
+index 3650c1d..9d1a16b 100644
+--- a/skills/linux-perf/references/flow-d.md
++++ b/skills/linux-perf/references/flow-d.md
+@@ -52,6 +52,13 @@ If the user declines, skip to Phase 1.
+ Run the workload at a bisecting sequence of core counts. Use `taskset -c 0-<N-1>` to
+ pin to the first N logical CPUs.
+ 
++**Hybrid CPUs:** check `/sys/bus/event_source/devices/cpu_core/cpus` and
++`cpu_atom/cpus` before choosing N. P-cores and E-cores have different IPC, so a sweep
++that crosses the boundary (e.g. `0-7` when P-cores are `0-3` and E-cores `4-15`) will
++show a scaling cliff that is a core-type change, not contention. Keep the series inside
++one homogeneous set and state which set was used in the report; `nproc` alone is not a
++valid ceiling for a P-core series.
++
+ Start with: **1, 2, nproc/4, nproc/2, nproc** (remove duplicates for small nproc).
+ If the scaling factor between two adjacent points drops unexpectedly (< 0.80/core of
+ ideal), insert a midpoint and re-run.

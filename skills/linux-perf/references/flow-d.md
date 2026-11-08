@@ -52,6 +52,13 @@ If the user declines, skip to Phase 1.
 Run the workload at a bisecting sequence of core counts. Use `taskset -c 0-<N-1>` to
 pin to the first N logical CPUs.
 
+**Hybrid CPUs:** check `/sys/bus/event_source/devices/cpu_core/cpus` and
+`cpu_atom/cpus` before choosing N. P-cores and E-cores have different IPC, so a sweep
+that crosses the boundary (e.g. `0-7` when P-cores are `0-3` and E-cores `4-15`) will
+show a scaling cliff that is a core-type change, not contention. Keep the series inside
+one homogeneous set and state which set was used in the report; `nproc` alone is not a
+valid ceiling for a P-core series.
+
 Start with: **1, 2, nproc/4, nproc/2, nproc** (remove duplicates for small nproc).
 If the scaling factor between two adjacent points drops unexpectedly (< 0.80/core of
 ideal), insert a midpoint and re-run.

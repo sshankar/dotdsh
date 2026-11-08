@@ -8,13 +8,19 @@
 - **Installed at:** `skills/` (the `user-dsh` skill root, rank 400)
 - **License:** MIT, Copyright (c) 2026 Intel Corporation (full text below)
 
-These are copied from upstream with **one local modification**:
-`skills/phoronix-test-suite/SKILL.md` adds `disable-model-invocation: true`, so
-that skill is not offered to the model's catalog and is only reachable by
-explicit invocation. The other two skills are unmodified.
+### Local modifications
 
-Any other local edits will be overwritten on update, so keep customizations in a
-separate, differently named skill instead.
+Upstream content is copied verbatim except for the changes below. They are kept as
+patches in `local-patches/` so they can be re-applied after an update rather than
+being rediscovered from memory.
+
+| File | Change | Why |
+|---|---|---|
+| `skills/phoronix-test-suite/SKILL.md` | adds `disable-model-invocation: true` | Keeps PTS off the model-facing catalog; explicit invocation only |
+| `skills/linux-perf/references/building-blocks.md`, `flow-d.md` | drops `-a` from the three dual-profile `perf record` commands; adds notes on `perf_event_paranoid` and hybrid P/E pinning | `-a` needs CPU-wide events (`paranoid=0`) and makes the pinned measurement include unrelated system noise; the vendor's `HALF=nproc/2` core set mixes P- and E-cores |
+
+Any other local edits will be overwritten on update, so keep other customizations in
+a separate, differently named skill instead.
 
 ### Updating
 
@@ -23,11 +29,13 @@ tmp=$(mktemp -d)
 git clone --depth 1 https://github.com/intel/intel-performance-skills "$tmp"
 cp -r "$tmp"/skills/{linux-perf,performance-patterns,phoronix-test-suite} skills/
 rm -rf "$tmp"
-# re-apply the local modification (the copy above overwrites it)
-sed -i '/^name: phoronix-test-suite$/a disable-model-invocation: true' \
-  skills/phoronix-test-suite/SKILL.md
+git apply local-patches/*.patch   # re-apply the local modifications
 # then update the commit hash above and commit
 ```
+
+If a patch fails to apply, upstream changed those lines: resolve by hand and
+regenerate the patch with
+`git diff <vendor-commit> -- skills/<name> > local-patches/<name>.patch`.
 
 ### License
 

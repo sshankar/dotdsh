@@ -6,6 +6,9 @@
 sessions/
 storages/
 logs/
+attachments/
+cache/
+llm-deepseek/
 
 # installs & disposable artifacts
 node_modules/
