@@ -4,13 +4,16 @@ settings:
   autoInstallPeers: false
   excludeLinksFromLockfile: false
 
+patchedDependencies:
+  dsh-context: d381039c00e9017988aaa9a59640dcf078c86a3af98525268844eed7f721ffc0
+
 importers:
 
   .:
     dependencies:
       dsh-context:
         specifier: ^0.82.2
-        version: 0.82.2
+        version: 0.82.2(patch_hash=d381039c00e9017988aaa9a59640dcf078c86a3af98525268844eed7f721ffc0)
 
 packages:
 
@@ -37,7 +40,7 @@ packages:
 
 snapshots:
 
-  dsh-context@0.82.2:
+  dsh-context@0.82.2(patch_hash=d381039c00e9017988aaa9a59640dcf078c86a3af98525268844eed7f721ffc0):
     dependencies:
       zod: 4.4.3
 

@@ -14,6 +14,10 @@ llm-deepseek/
 node_modules/
 profiles/*/node_modules/
 profiles/*/.plugin-manager/
+.pnpm-store/
+.state/
+.data/
+.run/
 
 # machine-local override layer
 /cordis.patch.yml

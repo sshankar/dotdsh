@@ -3,3 +3,5 @@ packages:
 
 nodeLinker: hoisted
 autoInstallPeers: false
+patchedDependencies:
+  dsh-context: patches/dsh-context@0.82.2.patch
