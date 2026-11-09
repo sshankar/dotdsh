@@ -5,20 +5,20 @@ settings:
   excludeLinksFromLockfile: false
 
 patchedDependencies:
-  dsh-context: d381039c00e9017988aaa9a59640dcf078c86a3af98525268844eed7f721ffc0
+  dsh-context: 7af6cc7764e4a63d4323a119eeec6b0e6da9042ed9a07678ca390e02898bd8d8
 
 importers:
 
   .:
     dependencies:
       dsh-context:
-        specifier: ^0.82.2
-        version: 0.82.2(patch_hash=d381039c00e9017988aaa9a59640dcf078c86a3af98525268844eed7f721ffc0)
+        specifier: ^0.83.0
+        version: 0.83.0(patch_hash=7af6cc7764e4a63d4323a119eeec6b0e6da9042ed9a07678ca390e02898bd8d8)
 
 packages:
 
-  dsh-context@0.82.2:
-    resolution: {integrity: sha512-myYjK6a79ZDJ1ALTI3hIBjVk2lsNCb3hUViSeS7Vjf+Xi2G8jkT1bi8+njyd77uOVDT6NYBPkjbf5bP5OXpafg==}
+  dsh-context@0.83.0:
+    resolution: {integrity: sha512-A08NdB7OksVu1ywxkfok6OK9Eo1LmpBq/03LgX45Wr7Z9jDD8BE/NfFjEu2vViALwiWjXle8ZZIr7liH9MsVqA==}
     engines: {dsh: '>=0.2.0-rc.2 || >=0.2.1-rc.2 || >=0.2.2-rc.1', node: ^22.19.0 || >=24.0.0}
     peerDependencies:
       '@deepseek-ai/cordis': ^4.0.4 || >=4.0.6-alpha.2 <5.0.0
@@ -40,7 +40,7 @@ packages:
 
 snapshots:
 
-  dsh-context@0.82.2(patch_hash=d381039c00e9017988aaa9a59640dcf078c86a3af98525268844eed7f721ffc0):
+  dsh-context@0.83.0(patch_hash=7af6cc7764e4a63d4323a119eeec6b0e6da9042ed9a07678ca390e02898bd8d8):
     dependencies:
       zod: 4.4.3
 

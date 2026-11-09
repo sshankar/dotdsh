@@ -2,7 +2,7 @@
   "name": "dsh-profile-web",
   "private": true,
   "dependencies": {
-    "dsh-context": "^0.82.2"
+    "dsh-context": "^0.83.0"
   },
   "dsh": {
     "profile": {

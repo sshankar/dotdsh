@@ -3,5 +3,7 @@ packages:
 
 nodeLinker: hoisted
 autoInstallPeers: false
+minimumReleaseAgeExclude:
+  - dsh-context@0.83.0
 patchedDependencies:
-  dsh-context: patches/dsh-context@0.82.2.patch
+  dsh-context: patches/dsh-context@0.83.0.patch
