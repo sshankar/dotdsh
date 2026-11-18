@@ -1,0 +1,7 @@
+{
+  "client_id": "dcr-3MDBDQJV3tB87LPomO8KB50Vdm4",
+  "redirect_uris": ["http://localhost:20588/oauth/callback"],
+  "token_endpoint_auth_method": "none",
+  "grant_types": ["authorization_code", "refresh_token"],
+  "response_types": ["code"]
+}

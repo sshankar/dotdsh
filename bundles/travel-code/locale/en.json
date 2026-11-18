@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Travel (code mode)",
+    "description": "Code-mode agent preset for travel planning, with the seats.aero award-search MCP server authenticated through mcp-remote's OAuth flow. Add more MCP servers as extra rows."
+  }
+}

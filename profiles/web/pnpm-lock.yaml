@@ -11,11 +11,18 @@ importers:
 
   .:
     dependencies:
+      '@local/dsh-travel-code':
+        specifier: file:../../bundles/local-dsh-travel-code-0.2.2.tgz
+        version: file:../../bundles/local-dsh-travel-code-0.2.2.tgz
       dsh-context:
         specifier: ^0.83.0
         version: 0.83.0(patch_hash=7af6cc7764e4a63d4323a119eeec6b0e6da9042ed9a07678ca390e02898bd8d8)
 
 packages:
+
+  '@local/dsh-travel-code@file:../../bundles/local-dsh-travel-code-0.2.2.tgz':
+    resolution: {integrity: sha512-baWVXoP3SNxuBfxHTQkh9+uukEdVnYrxZ/6EtiiP7xGBvNbOkaP75IRgpVmdpmVU6ptlXwKu5MNyPMWTx1irbQ==, tarball: file:../../bundles/local-dsh-travel-code-0.2.2.tgz}
+    version: 0.2.2
 
   dsh-context@0.83.0:
     resolution: {integrity: sha512-A08NdB7OksVu1ywxkfok6OK9Eo1LmpBq/03LgX45Wr7Z9jDD8BE/NfFjEu2vViALwiWjXle8ZZIr7liH9MsVqA==}
@@ -39,6 +46,8 @@ packages:
     resolution: {integrity: sha512-ytENFjIJFl2UwYglde2jchW2Hwm4GJFLDiSXWdTrJQBIN9Fcyp7n4DhxJEiWNAJMV1/BqWfW/kkg71UDcHJyTQ==}
 
 snapshots:
+
+  '@local/dsh-travel-code@file:../../bundles/local-dsh-travel-code-0.2.2.tgz': {}
 
   dsh-context@0.83.0(patch_hash=7af6cc7764e4a63d4323a119eeec6b0e6da9042ed9a07678ca390e02898bd8d8):
     dependencies:

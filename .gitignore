@@ -15,6 +15,7 @@ node_modules/
 profiles/*/node_modules/
 profiles/*/.plugin-manager/
 .pnpm-store/
+.npm-cache/
 .state/
 .data/
 .run/
